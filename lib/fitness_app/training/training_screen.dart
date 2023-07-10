@@ -61,7 +61,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     listViews.add(
       TitleView(
         titleTxt: 'Your program',
-        subTxt: 'Details',
+        // subTxt: 'Details',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -92,7 +92,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     listViews.add(
       TitleView(
         titleTxt: 'Area of focus',
-        subTxt: 'more',
+        // subTxt: 'more',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
