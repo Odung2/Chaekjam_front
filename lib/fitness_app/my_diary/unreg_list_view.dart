@@ -7,8 +7,8 @@ import 'dart:convert';
 
 import '../../main.dart';
 
-class MealsListView extends StatefulWidget {
-  const MealsListView(
+class UnregListView extends StatefulWidget {
+  const UnregListView(
       {Key? key, this.mainScreenAnimationController, this.mainScreenAnimation})
       : super(key: key);
 
@@ -16,13 +16,12 @@ class MealsListView extends StatefulWidget {
   final Animation<double>? mainScreenAnimation;
 
   @override
-  _MealsListViewState createState() => _MealsListViewState();
+  _UnregListViewState createState() => _UnregListViewState();
 }
 
-class _MealsListViewState extends State<MealsListView>
+class _UnregListViewState extends State<UnregListView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<MealsListData> regListData = MealsListData.RegList;
   List<MealsListData> unRegListData = MealsListData.UnRegList;
   @override
   void initState() {
@@ -36,11 +35,9 @@ class _MealsListViewState extends State<MealsListView>
   }
 
   Future<void> initializeData() async {
-    await MealsListData().initializeRegList();
-    // await MealsListData().initializeUnRegList();
+    await MealsListData().initializeUnRegList();
     setState(() {
-      regListData = MealsListData.RegList;
-      // unRegListData = MealsListData.UnRegList;
+      unRegListData = MealsListData.UnRegList;
     });
   }
 
@@ -71,11 +68,11 @@ class _MealsListViewState extends State<MealsListView>
               child: ListView.builder(
                 padding: const EdgeInsets.only(
                     top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: regListData.length,
+                itemCount: unRegListData.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   final int count = //mealsListData.length;
-                  regListData.length > 10 ? 10 : regListData.length;
+                  unRegListData.length > 10 ? 10 : unRegListData.length;
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                           CurvedAnimation(
@@ -85,7 +82,7 @@ class _MealsListViewState extends State<MealsListView>
                   animationController?.forward();
 
                   return MealsView(
-                    mealsListData: regListData[index],
+                    mealsListData: unRegListData[index],
                     animation: animation,
                     animationController: animationController!,
                   );
