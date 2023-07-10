@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SplashView extends StatefulWidget {
   final AnimationController animationController;
@@ -11,6 +13,32 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  String userName = '';
+  String userProfile = '';
+
+  @override
+  void initState() {
+    fetchDataFromAPI();
+    super.initState();
+     // Call the method to fetch data from the API
+  }
+
+  Future<void> fetchDataFromAPI() async {
+    final response = await http.get(Uri.parse('http://172.10.5.121:443/users/%EC%86%A1%EB%8F%84%EC%9C%A4'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> userData = data as List<dynamic>;
+      print(userData);
+      final userN = userData[0]['username'] as String;
+      final userPro = userData[0]['profile_image'] as String;
+
+      setState(() {
+        userName = userN;
+        userProfile = userPro;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _introductionanimation =
@@ -30,22 +58,23 @@ class _SplashViewState extends State<SplashView> {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/introduction_animation/introduction_image.png',
+              child: Image.network(
+                userProfile,
+                //'assets/introduction_animation/introduction_image.png',
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
-                "Clearhead",
+                userName,
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 64, right: 64),
               child: Text(
-                "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                "책 읽기를 정말 좋아하시는 분 " + userName + ' 앞으로도 서비스 자주 이용해주세요!',
                 textAlign: TextAlign.center,
               ),
             ),
