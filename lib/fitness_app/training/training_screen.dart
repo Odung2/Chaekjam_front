@@ -26,6 +26,9 @@ class _TrainingScreenState extends State<TrainingScreen>
   double topBarOpacity = 0.0;
   String userName = '';
   String userProfile = '';
+  int userReview = 0;
+
+
 
   @override
   void initState() {
@@ -73,19 +76,25 @@ class _TrainingScreenState extends State<TrainingScreen>
       if (response.statusCode == 200) {
         // Handle the successful response here
         final responseBody = json.decode(response.body);
-
         final List<dynamic> userData = responseBody as List<dynamic>;
-
         final userName = userData[0]['username'] as String;
         final userProfile = userData[0]['profile_image'] as String;
+        final reviewCount = userData[0]['review_count'];
+
         print(userName);
         print(userProfile);
+        print(reviewCount);
+
         setState(() {
           this.userName = userName;
-          this.userProfile = userProfile;// Store the responseBody in the class-level variable
+          this.userProfile = userProfile;
+          this.userReview = reviewCount;
+
+          addAllListData();// Store the responseBody in the class-level variable
         });
 
-        addAllListData();
+
+
 
       } else {
         // Handle errors here
@@ -112,7 +121,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
     listViews.add(
       TitleView(
-        titleTxt: '안녕하세요',
+        titleTxt: '안녕하세요 🐱',
         // subTxt: 'Details',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
@@ -130,6 +139,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                 Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
         userName: userName,
+        userProfile: userProfile,
+        numReview: userReview,
       ),
     );
     listViews.add(

@@ -7,12 +7,14 @@ class TitleView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
+
   const TitleView(
       {Key? key,
       this.titleTxt: "",
       this.subTxt: "",
       this.animationController,
-      this.animation})
+      this.animation,
+      })
       : super(key: key);
 
   @override

@@ -7,9 +7,15 @@ class WorkoutView extends StatefulWidget {
   final Animation<double>? animation;
   final String? userName;
   final String? userProfile;
+  final int numReview;
 
-  const WorkoutView({Key? key, this.animationController, this.animation, this.userName, this.userProfile})
-      : super(key: key);
+  const WorkoutView({Key? key,
+    this.animationController,
+    this.animation,
+    this.userName,
+    this.userProfile,
+    this.numReview: 0
+  }) : super(key: key);
 
   @override
   _WorkoutViewState createState() => _WorkoutViewState();
@@ -55,7 +61,7 @@ class _WorkoutViewState extends State<WorkoutView> {
                     children: <Widget>[
                       CircleAvatar(
                         radius: 65.0,
-                        // backgroundImage: NetworkImage(widget.userProfile ?? ''),
+                        backgroundImage: NetworkImage(widget.userProfile ?? ''),
                         backgroundColor: Colors.white,
                       ),
                       // Text(
@@ -72,7 +78,7 @@ class _WorkoutViewState extends State<WorkoutView> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          widget.userName ?? '',
+                          '${widget.userName} 님' ?? '',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: FitnessAppTheme.fontName,
@@ -102,8 +108,8 @@ class _WorkoutViewState extends State<WorkoutView> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 4.0),
-                              child: const Text(
-                                '68권의 책을 읽었습니다!',
+                              child: Text(
+                                '${widget.numReview.toString()} 권의 책을 읽었습니다!',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
