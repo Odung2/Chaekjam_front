@@ -8,6 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'filters_screen.dart';
 import 'hotel_app_theme.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HotelHomeScreen extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class HotelHomeScreen extends StatefulWidget {
 class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<OtherReviewListData> OtherReviewList = OtherReviewListData.hotelList;
+  List<OtherReviewListData> OtherReviewList = [];
   final ScrollController _scrollController = ScrollController();
 
   DateTime startDate = DateTime.now();
@@ -25,13 +27,57 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
   @override
   void initState() {
+
+    initializeOtherReviewList();
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: const Duration(milliseconds: 2000), vsync: this);
+
     super.initState();
   }
 
+  Future<void> initializeOtherReviewList() async {
+    final url = 'http://172.10.5.121:443/review/'; // Replace with your API URL
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        print(response);
+
+        final jsonData = json.decode(response.body);
+
+        final List<dynamic> reviewsData = jsonData as List<dynamic>;
+        //print(reviewsData);
+        OtherReviewList = reviewsData.map((reviewData) {
+          var index = reviewsData.indexOf(reviewData);
+          print(reviewData);
+
+          final user_id = reviewData['user_id'] as int;
+          final book_id = reviewData['book_id'] as int;
+          final title = reviewData['title'] as String;
+          final meeting_id = reviewData['meeting_id'] as int;
+          final rating = reviewData['rating'] as String;
+          final content_id = reviewData['content_id'] as int;
+          final content = reviewData['content'] as String;
+          final username = reviewData['username'] as String;
+          final imagelink = reviewData['imagelink'] as String;
+
+          return OtherReviewListData(
+            imagePath: imagelink,
+            titleTxt: title,
+            subTxt: username,
+            reviews: content,
+            rating: double.parse(rating),
+          );
+        }).toList();
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
+
   Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 1000));
     return true;
   }
 
@@ -89,28 +135,49 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                         body: Container(
                           color:
                               HotelAppTheme.buildLightTheme().backgroundColor,
-                          child: ListView.builder(
-                            itemCount: OtherReviewList.length,
-                            padding: const EdgeInsets.only(top: 8),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (BuildContext context, int index) {
-                              final int count =
-                              OtherReviewList.length > 10 ? 10 : OtherReviewList.length;
-                              final Animation<double> animation =
-                                  Tween<double>(begin: 0.0, end: 1.0).animate(
-                                      CurvedAnimation(
-                                          parent: animationController!,
-                                          curve: Interval(
-                                              (1 / count) * index, 1.0,
-                                              curve: Curves.fastOutSlowIn)));
-                              animationController?.forward();
-                              return OtherReviewListView(
-                                callback: () {},
-                                OtherReviewData: OtherReviewList[index],
-                                animation: animation,
-                                animationController: animationController!,
-                              );
-                            },
+                          child: FutureBuilder<void>(
+                              future: initializeOtherReviewList(),
+                            builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                // API data is being fetched
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else if (snapshot.hasError) {
+                                // Error occurred while fetching data
+                                return Center(
+                                  child: Text('Error: ${snapshot.error}'),
+                                );
+                              } else {
+                                return ListView.builder(
+                                  itemCount: OtherReviewList.length,
+                                  padding: const EdgeInsets.only(top: 8),
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (BuildContext context,
+                                      int index) {
+                                    final int count =
+                                    OtherReviewList.length > 10
+                                        ? 10
+                                        : OtherReviewList.length;
+                                    final Animation<double> animation =
+                                    Tween<double>(begin: 0.0, end: 1.0).animate(
+                                        CurvedAnimation(
+                                            parent: animationController!,
+                                            curve: Interval(
+                                                (1 / count) * index, 1.0,
+                                                curve: Curves.fastOutSlowIn)));
+                                    animationController?.forward();
+                                    return OtherReviewListView(
+                                      callback: () {},
+                                      OtherReviewData: OtherReviewList[index],
+                                      animation: animation,
+                                      animationController: animationController!,
+                                    );
+                                  },
+                                );
+                              }
+                            }
                           ),
                         ),
                       ),

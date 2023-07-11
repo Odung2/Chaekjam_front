@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class OtherReviewListView extends StatelessWidget {
+class OtherReviewListView extends StatefulWidget  {
   const OtherReviewListView(
       {Key? key,
         this.OtherReviewData,
@@ -20,21 +20,28 @@ class OtherReviewListView extends StatelessWidget {
   final Animation<double>? animation;
 
   @override
+  _OtherReviewListViewState createState() => _OtherReviewListViewState();
+}
+
+class _OtherReviewListViewState extends State<OtherReviewListView>
+    with TickerProviderStateMixin {
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController!,
+      animation: widget.animationController!,
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
-          opacity: animation!,
+          opacity: widget.animation!,
           child: Transform(
             transform: Matrix4.translationValues(
-                0.0, 50 * (1.0 - animation!.value), 0.0),
+                0.0, 50 * (1.0 - widget.animation!.value), 0.0),
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 24, right: 24, top: 8, bottom: 16),
               child: InkWell(
                 splashColor: Colors.transparent,
-                onTap: callback,
+                onTap: widget.callback,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
@@ -54,8 +61,8 @@ class OtherReviewListView extends StatelessWidget {
                           children: <Widget>[
                             AspectRatio(
                               aspectRatio: 2,
-                              child: Image.asset(
-                                OtherReviewData!.imagePath,
+                              child: Image.network(
+                                widget.OtherReviewData!.imagePath,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -78,7 +85,7 @@ class OtherReviewListView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              OtherReviewData!.titleTxt,
+                                              widget.OtherReviewData!.titleTxt,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -92,7 +99,7 @@ class OtherReviewListView extends StatelessWidget {
                                               MainAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  OtherReviewData!.subTxt,
+                                                  widget.OtherReviewData!.subTxt,
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.grey
@@ -128,7 +135,7 @@ class OtherReviewListView extends StatelessWidget {
                                                 children: <Widget>[
                                                   RatingBar(
                                                     initialRating:
-                                                    OtherReviewData!.rating,
+                                                    widget.OtherReviewData!.rating,
                                                     direction: Axis.horizontal,
                                                     allowHalfRating: true,
                                                     itemCount: 5,
@@ -172,7 +179,7 @@ class OtherReviewListView extends StatelessWidget {
                                                                 Navigator.push(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                    builder: (context) => ExtendedReviewView(data: OtherReviewData),
+                                                                    builder: (context) => ExtendedReviewView(data: widget.OtherReviewData),
                                                                   ),
                                                                 );
                                                               },
@@ -184,7 +191,7 @@ class OtherReviewListView extends StatelessWidget {
                                                                 overflow: TextOverflow.ellipsis,
                                                                 maxLines: 3,
                                                                 text: TextSpan(
-                                                                  text:'${OtherReviewData!.reviews }',
+                                                                  text:'${widget.OtherReviewData!.reviews }',
                                                                   style: TextStyle(
                                                                     color: Color(0xFF4E4E4E),
                                                                     fontSize: 12,
