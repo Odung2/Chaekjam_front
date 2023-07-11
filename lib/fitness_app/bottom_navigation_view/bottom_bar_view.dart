@@ -227,6 +227,12 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
     widget.tabIconData?.animationController?.forward();
   }
 
+  void addClick() {
+    // 추가 버튼이 클릭되었을 때 실행할 동작을 여기에 작성합니다.
+    // 예를 들어, 새로운 항목을 생성하거나 화면을 전환하는 등의 동작을 수행할 수 있습니다.
+    // print('추가 버튼이 클릭되었습니다.');
+  }
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(

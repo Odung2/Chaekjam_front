@@ -127,7 +127,7 @@ class _TrainingScreenState extends State<TrainingScreen>
         body: Stack(
           children: <Widget>[
             getMainListViewUI(),
-            getAppBarUI(),
+            getAppBarUI(), //하단에 있는 navigate bar
             SizedBox(
               height: MediaQuery.of(context).padding.bottom,
             )
@@ -207,7 +207,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Training',
+                                  '리뷰 모아',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
