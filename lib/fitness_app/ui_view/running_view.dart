@@ -4,8 +4,9 @@ import '../fitness_app_theme.dart';
 class RunningView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final String titleTxt;
 
-  const RunningView({Key? key, this.animationController, this.animation})
+  const RunningView({Key? key, this.titleTxt:" ", this.animationController, this.animation})
       : super(key: key);
 
   @override

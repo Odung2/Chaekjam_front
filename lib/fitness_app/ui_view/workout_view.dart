@@ -2,23 +2,30 @@ import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import '../fitness_app_theme.dart';
 
-class WorkoutView extends StatelessWidget {
+class WorkoutView extends StatefulWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final String? userName;
+  final String? userProfile;
 
-  const WorkoutView({Key? key, this.animationController, this.animation})
+  const WorkoutView({Key? key, this.animationController, this.animation, this.userName, this.userProfile})
       : super(key: key);
 
   @override
+  _WorkoutViewState createState() => _WorkoutViewState();
+}
+
+class _WorkoutViewState extends State<WorkoutView> {
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController!,
+      animation: widget.animationController!,
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
-          opacity: animation!,
-          child: new Transform(
-            transform: new Matrix4.translationValues(
-                0.0, 30 * (1.0 - animation!.value), 0.0),
+          opacity: widget.animation!,
+          child: Transform(
+            transform: Matrix4.translationValues(
+                0.0, 30 * (1.0 - widget.animation!.value), 0.0),
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 24, right: 24, top: 16, bottom: 18),
@@ -44,23 +51,28 @@ class WorkoutView extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Next workout',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: FitnessAppTheme.fontName,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14,
-                          letterSpacing: 0.0,
-                          color: FitnessAppTheme.white,
-                        ),
+                      CircleAvatar(
+                        radius: 65.0,
+                        // backgroundImage: NetworkImage(widget.userProfile ?? ''),
+                        backgroundColor: Colors.white,
                       ),
+                      // Text(
+                      //   'Next workout',
+                      //   textAlign: TextAlign.left,
+                      //   style: TextStyle(
+                      //     fontFamily: FitnessAppTheme.fontName,
+                      //     fontWeight: FontWeight.normal,
+                      //     fontSize: 14,
+                      //     letterSpacing: 0.0,
+                      //     color: FitnessAppTheme.white,
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
-                        child: const Text(
-                          'Legs Toning and\nGlutes Workout at Home',
+                        child: Text(
+                          widget.userName ?? '',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: FitnessAppTheme.fontName,
@@ -83,7 +95,7 @@ class WorkoutView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Icon(
-                                Icons.timer,
+                                Icons.book,
                                 color: FitnessAppTheme.white,
                                 size: 16,
                               ),
@@ -91,7 +103,7 @@ class WorkoutView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(left: 4.0),
                               child: const Text(
-                                '68 min',
+                                '68권의 책을 읽었습니다!',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
@@ -118,9 +130,9 @@ class WorkoutView extends StatelessWidget {
                                 ],
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(0.0),
+                                padding: const EdgeInsets.all(5.0),
                                 child: Icon(
-                                  Icons.arrow_right,
+                                  Icons.logout,
                                   color: HexColor("#6F56E8"),
                                   size: 44,
                                 ),

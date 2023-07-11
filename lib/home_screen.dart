@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginWebview()),
+                          MaterialPageRoute(builder: (context) => MyWebView()),
                         );
                         // Perform Kakao login here
                       },
@@ -256,6 +256,7 @@ class HomeListView extends StatelessWidget {
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
+
                     Positioned.fill(
                       child: Image.asset(
                         listData!.imagePath,
