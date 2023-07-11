@@ -7,6 +7,7 @@ import 'model/homelist.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -15,6 +16,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<HomeList> homeList = HomeList.homeList;
   AnimationController? animationController;
   bool multiple = true;
+
 
   @override
   void initState() {
@@ -36,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isLightMode = brightness == Brightness.light;
     return Scaffold(
@@ -108,45 +111,28 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       },
                     ),
                   ),
-                  Container(
-                    child: ElevatedButton(
-                      child: Container(
-                        width: 215,
-                        height: 48,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              top: 0,
-                              child: Container(
-                                width: 215,
-                                height: 48,
-                                decoration: ShapeDecoration(
-                                  color: Color(0xFFFEE500),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 64,
-                              top: 14,
-                              child: Text(
-                                '카카오톡으로  로그인',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF4E4E4E),
-                                  fontSize: 14,
-                                  fontFamily: 'Noto Sans KR',
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: -0.28,
-                                ),
-                              ),
-                            ),
-                          ],
+                  Spacer(),
+                  Center(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      width: size.width *0.9,
+                      child: Text(
+                        '책잼, 독서의 새로운 차원!\n독서모임을 만들고, 함께 책을 읽는 사람들과 소통해보세요. \n감상 공유, 독서 후기 작성, 다양한 독서 모임 참여 등 다채로운 기능을 경험해보세요. \n책을 사랑하는 이들을 위한 독서 플랫폼, 지금 책잼에서 독서의 재미를 더해보세요!',
+                        style: TextStyle(
+                          color: Colors.greenAccent,
+                          fontSize: 14,
+                          fontFamily: 'Noto Sans KR',
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: -0.24,
                         ),
                       ),
+                    ),
+                  ),
+                  SizedBox( //버튼 아래 여백 공간
+                      height: 30
+                  ),
+                  Center(
+                    child: ElevatedButton(
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
@@ -154,7 +140,90 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         );
                         // Perform Kakao login here
                       },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero, // 패딩 제거
+                        minimumSize: Size(215, 48), // 최소 크기 설정
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: Color(0xFFCCCCCC),
+                      ),
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '계정이 없으신가요? ',
+                              style: TextStyle(
+                                color: Color(0xFF4E4E4E),
+                                fontSize: 12,
+                                fontFamily: 'Noto Sans KR',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '가입하기',
+                              style: TextStyle(
+                                color: Color(0xFF007BED),
+                                fontSize: 12,
+                                fontFamily: 'Noto Sans KR',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
+                  ),
+                  SizedBox( //버튼 아래 여백 공간
+                      height: 16
+                  ),
+                  Center(
+                    child: Text(
+                      '또는',
+                      style: TextStyle(
+                        color: Color(0xFF656565),
+                        fontSize: 12,
+                        fontFamily: 'Noto Sans KR',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  SizedBox( //버튼 아래 여백 공간
+                      height: 16
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginWebview()),
+                        );
+                        // Perform Kakao login here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero, // 패딩 제거
+                        minimumSize: Size(215, 48), // 최소 크기 설정
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: Color(0xFFFEE500),
+                      ),
+                      child: Text(
+                        '카카오톡으로 로그인',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFF4E4E4E),
+                          fontSize: 14,
+                          fontFamily: 'Noto Sans KR',
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: -0.28,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox( //버튼 아래 여백 공간
+                      height: 16
                   ),
                 ],
               ),

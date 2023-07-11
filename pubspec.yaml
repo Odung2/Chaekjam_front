@@ -35,7 +35,15 @@ dependencies:
     flutter_rating_bar: ^4.0.1
     intl: ^0.17.0
     animations: ^2.0.3
+
     http: ^0.13.4
+    #아래부터는 notepaddd에 필요한거
+    fluentui_system_icons: 1.1.173
+    #//sdk 1.6.0에 맞춤
+    sqflite: ^2.2.8+4
+    url_launcher: ^6.1.12
+    shared_preferences: ^2.2.0
+    share_plus: ^4.5.1
 
 dev_dependencies:
     flutter_test:
@@ -58,6 +66,7 @@ flutter:
         - assets/fitness_app/
         - assets/hotel/
         - assets/introduction_animation/
+        - assets/reviews/
 
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.

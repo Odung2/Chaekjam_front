@@ -217,7 +217,7 @@ class _TrainingScreenState extends State<TrainingScreen>
         body: Stack(
           children: <Widget>[
             getMainListViewUI(),
-            getAppBarUI(),
+            getAppBarUI(), //하단에 있는 navigate bar
             SizedBox(
               height: MediaQuery.of(context).padding.bottom,
             )
