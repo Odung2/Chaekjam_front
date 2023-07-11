@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
+import 'package:best_flutter_ui_templates/login_webview.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 
@@ -166,6 +167,14 @@ class _BottomBarViewState extends State<BottomBarView>
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           onTap: widget.addClick,
+
+                          // child: TabIcons(
+                          //     tabIconData: widget.tabIconsList?[3],
+                          //     removeAllSelect: () {
+                          //       setRemoveAllSelection(
+                          //           widget.tabIconsList?[3]);
+                          //       widget.changeIndex!(1);
+                          //     }),
                           child: Icon(
                             Icons.add,
                             color: FitnessAppTheme.white,
@@ -227,11 +236,15 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
     widget.tabIconData?.animationController?.forward();
   }
 
-  void addClick() {
-    // 추가 버튼이 클릭되었을 때 실행할 동작을 여기에 작성합니다.
-    // 예를 들어, 새로운 항목을 생성하거나 화면을 전환하는 등의 동작을 수행할 수 있습니다.
-    // print('추가 버튼이 클릭되었습니다.');
-  }
+  // void addClick() {
+  //   // 추가 버튼이 클릭되었을 때 실행할 동작을 여기에 작성합니다.
+  //   // 예를 들어, 새로운 항목을 생성하거나 화면을 전환하는 등의 동작을 수행할 수 있습니다.
+  //   // print('추가 버튼이 클릭되었습니다.');
+  //   // Navigator.pushReplacement(
+  //   //     context,
+  //   //     MaterialPageRoute(builder: (context) => LoginWebview())
+  //   // );
+  // }
 
   @override
   Widget build(BuildContext context) {

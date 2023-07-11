@@ -1,10 +1,14 @@
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/other_review/other_review_home_screen.dart';
 import 'package:best_flutter_ui_templates/fitness_app/other_review/training_screen.dart';
+import 'package:best_flutter_ui_templates/login_webview.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fitness_app_theme.dart';
 import 'my_diary/my_diary_screen.dart';
+import 'write_review/screens/home.dart';
+
+
 
 class FitnessAppHomeScreen extends StatefulWidget {
   @override
@@ -20,6 +24,18 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
   Widget tabBody = Container(
     color: FitnessAppTheme.background,
   );
+
+  //notepad Tlqkf
+  ThemeData theme = ThemeData.light();
+  void changeTheme(Brightness brightness) {
+    setState(() {
+      if (brightness == Brightness.dark) {
+        theme = ThemeData.dark();
+      } else {
+        theme = ThemeData.light();
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -70,6 +86,18 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     return true;
   }
 
+  // setTheme(Brightness brightness) {
+  //   if (brightness == Brightness.dark) {
+  //     setState(() {
+  //       theme = appThemeDark;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       theme = appThemeLight;
+  //     });
+  //   }
+  // }
+
   Widget bottomBar() {
     return Column(
       children: <Widget>[
@@ -78,7 +106,20 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
         ),
         BottomBarView(
           tabIconsList: tabIconsList,
-          addClick: () {},
+          addClick: () {
+            setState(() {
+              // tabBody =
+              // // TrainingScreen(animationController: animationController);
+              // WriteReviewHomeScreen(changeTheme: changeTheme);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WriteReviewHomeScreen(changeTheme: changeTheme),
+                ),
+              );
+
+            });
+          },
           changeIndex: (int index) {
             if (index == 0 || index == 2) {
               animationController?.reverse().then<dynamic>((data) {
