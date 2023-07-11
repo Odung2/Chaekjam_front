@@ -3,6 +3,9 @@ import 'package:best_flutter_ui_templates/fitness_app/ui_view/running_view.dart'
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/title_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/workout_view.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 import '../fitness_app_theme.dart';
 
@@ -21,6 +24,11 @@ class _TrainingScreenState extends State<TrainingScreen>
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
+  String userName = '';
+  String userProfile = '';
+  int userReview = 0;
+
+
 
   @override
   void initState() {
@@ -28,7 +36,7 @@ class _TrainingScreenState extends State<TrainingScreen>
         CurvedAnimation(
             parent: widget.animationController!,
             curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
-    addAllListData();
+    getDataFromServer();
 
     scrollController.addListener(() {
       if (scrollController.offset >= 24) {
@@ -52,16 +60,69 @@ class _TrainingScreenState extends State<TrainingScreen>
         }
       }
     });
+
     super.initState();
   }
 
+  Future<void> getDataFromServer() async {
+
+    String? userToken = await validateJWTToken();
+
+    final url = Uri.parse(
+        'http://172.10.5.121:443/users/' + userToken);
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        // Handle the successful response here
+        final responseBody = json.decode(response.body);
+        final List<dynamic> userData = responseBody as List<dynamic>;
+        final userName = userData[0]['username'] as String;
+        final userProfile = userData[0]['profile_image'] as String;
+        final reviewCount = userData[0]['review_count'];
+
+        print(userName);
+        print(userProfile);
+        print(reviewCount);
+
+        setState(() {
+          this.userName = userName;
+          this.userProfile = userProfile;
+          this.userReview = reviewCount;
+
+          addAllListData();// Store the responseBody in the class-level variable
+        });
+
+
+
+
+      } else {
+        // Handle errors here
+        print('HTTP request failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle exceptions here
+      print('HTTP request error: $error');
+    }
+  }
+
+  Future<String> validateJWTToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? successParameter = prefs.getString('success_parameter');
+
+    // Use the retrieved value as needed
+    return successParameter!;
+  }
+
+
   void addAllListData() {
-    const int count = 5;
+    const int count = 7;
 
     listViews.add(
       TitleView(
-        titleTxt: 'Your program',
-        subTxt: 'Details',
+        titleTxt: '안녕하세요 🐱',
+        // subTxt: 'Details',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -77,10 +138,14 @@ class _TrainingScreenState extends State<TrainingScreen>
             curve:
                 Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
+        userName: userName,
+        userProfile: userProfile,
+        numReview: userReview,
       ),
     );
     listViews.add(
       RunningView(
+        titleTxt: '지금까지 읽은 책들.',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -91,8 +156,8 @@ class _TrainingScreenState extends State<TrainingScreen>
 
     listViews.add(
       TitleView(
-        titleTxt: 'Area of focus',
-        subTxt: 'more',
+        titleTxt: '현재 참여 중인 북클럽',
+        // subTxt: 'more',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
@@ -110,7 +175,32 @@ class _TrainingScreenState extends State<TrainingScreen>
                     curve: Curves.fastOutSlowIn))),
         mainScreenAnimationController: widget.animationController!,
       ),
+
     );
+
+    listViews.add(
+      TitleView(
+        titleTxt: '지금까지 읽은 책들',
+        // subTxt: 'more',
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: widget.animationController!,
+            curve:
+            Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: widget.animationController!,
+      ),
+    );
+    listViews.add(
+      AreaListView(
+        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+                parent: widget.animationController!,
+                curve: Interval((1 / count) * 5, 1.0,
+                    curve: Curves.fastOutSlowIn))),
+        mainScreenAnimationController: widget.animationController!,
+      ),
+
+    );
+
   }
 
   Future<bool> getData() async {
@@ -207,7 +297,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Training',
+                                  'Profile',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -219,65 +309,10 @@ class _TrainingScreenState extends State<TrainingScreen>
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 38,
-                              width: 38,
-                              child: InkWell(
-                                highlightColor: Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
-                                onTap: () {},
-                                child: Center(
-                                  child: Icon(
-                                    Icons.keyboard_arrow_left,
-                                    color: FitnessAppTheme.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                 left: 8,
                                 right: 8,
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: Icon(
-                                      Icons.calendar_today,
-                                      color: FitnessAppTheme.grey,
-                                      size: 18,
-                                    ),
-                                  ),
-                                  Text(
-                                    '15 May',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontFamily: FitnessAppTheme.fontName,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 18,
-                                      letterSpacing: -0.2,
-                                      color: FitnessAppTheme.darkerText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 38,
-                              width: 38,
-                              child: InkWell(
-                                highlightColor: Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
-                                onTap: () {},
-                                child: Center(
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right,
-                                    color: FitnessAppTheme.grey,
-                                  ),
-                                ),
                               ),
                             ),
                           ],

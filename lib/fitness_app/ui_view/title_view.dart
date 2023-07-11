@@ -7,12 +7,14 @@ class TitleView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
+
   const TitleView(
       {Key? key,
       this.titleTxt: "",
       this.subTxt: "",
       this.animationController,
-      this.animation})
+      this.animation,
+      })
       : super(key: key);
 
   @override
@@ -62,15 +64,15 @@ class TitleView extends StatelessWidget {
                                 color: FitnessAppTheme.nearlyDarkBlue,
                               ),
                             ),
-                            SizedBox(
-                              height: 38,
-                              width: 26,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: FitnessAppTheme.darkText,
-                                size: 18,
-                              ),
-                            ),
+                            // SizedBox(
+                            //   height: 38,
+                            //   width: 26,
+                            //   child: Icon(
+                            //     Icons.arrow_forward,
+                            //     color: FitnessAppTheme.darkText,
+                            //     size: 18,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
