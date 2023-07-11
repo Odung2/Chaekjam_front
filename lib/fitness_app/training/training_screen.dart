@@ -27,6 +27,9 @@ class _TrainingScreenState extends State<TrainingScreen>
   String userName = '';
   String userProfile = '';
   int userReview = 0;
+  List<dynamic> title = [];
+  List<dynamic> imagePath = [];
+  // List<String>? imageLink = [];
 
 
 
@@ -80,15 +83,22 @@ class _TrainingScreenState extends State<TrainingScreen>
         final userName = userData[0]['username'] as String;
         final userProfile = userData[0]['profile_image'] as String;
         final reviewCount = userData[0]['review_count'];
+        final List<dynamic> titles = userData[0]['title'] as List<dynamic>;
+        final List<dynamic> imageLinks = userData[0]['imagelink'] as List<dynamic>;
+
 
         print(userName);
         print(userProfile);
         print(reviewCount);
+        print(titles);
+        print(imageLinks);
 
         setState(() {
           this.userName = userName;
           this.userProfile = userProfile;
           this.userReview = reviewCount;
+          this.title = titles;
+          this.imagePath = imageLinks;
 
           addAllListData();// Store the responseBody in the class-level variable
         });
@@ -154,29 +164,31 @@ class _TrainingScreenState extends State<TrainingScreen>
       ),
     );
 
-    listViews.add(
-      TitleView(
-        titleTxt: '현재 참여 중인 북클럽',
-        // subTxt: 'more',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
+    // listViews.add(
+    //   TitleView(
+    //     titleTxt: '현재 참여 중인 북클럽',
+    //     // subTxt: 'more',
+    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    //         parent: widget.animationController!,
+    //         curve:
+    //             Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+    //     animationController: widget.animationController!,
+    //   ),
+    // );
+    //
+    // listViews.add(
+    //   AreaListView(
+    //     mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
+    //         CurvedAnimation(
+    //             parent: widget.animationController!,
+    //             curve: Interval((1 / count) * 5, 1.0,
+    //                 curve: Curves.fastOutSlowIn))),
+    //     mainScreenAnimationController: widget.animationController!,
+    //     title : title,
+    //     imageLinks : imagePath,
+    //   ),
 
-    listViews.add(
-      AreaListView(
-        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-                parent: widget.animationController!,
-                curve: Interval((1 / count) * 5, 1.0,
-                    curve: Curves.fastOutSlowIn))),
-        mainScreenAnimationController: widget.animationController!,
-      ),
-
-    );
+    // );
 
     listViews.add(
       TitleView(
@@ -197,6 +209,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                 curve: Interval((1 / count) * 5, 1.0,
                     curve: Curves.fastOutSlowIn))),
         mainScreenAnimationController: widget.animationController!,
+        title : title,
+        imageLinks : imagePath,
       ),
 
     );
