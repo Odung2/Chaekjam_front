@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
+import 'package:best_flutter_ui_templates/main.dart';
 import '../fitness_app_theme.dart';
 
 class AreaListView extends StatefulWidget {
   const AreaListView(
-      {Key? key, this.mainScreenAnimationController, this.mainScreenAnimation})
+      {Key? key,
+        this.mainScreenAnimationController,
+        this.mainScreenAnimation,
+        required this.title,
+        required this.imageLinks,
+      })
       : super(key: key);
 
   final AnimationController? mainScreenAnimationController;
   final Animation<double>? mainScreenAnimation;
+  final List<dynamic> title;
+  final List<dynamic> imageLinks;
+
+
   @override
   _AreaListViewState createState() => _AreaListViewState();
 }
@@ -22,6 +32,7 @@ class _AreaListViewState extends State<AreaListView>
     'assets/fitness_app/area3.png',
     'assets/fitness_app/area1.png',
   ];
+
 
   @override
   void initState() {
@@ -56,7 +67,7 @@ class _AreaListViewState extends State<AreaListView>
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   children: List<Widget>.generate(
-                    areaListData.length,
+                    widget.title.length,
                     (int index) {
                       final int count = areaListData.length;
                       final Animation<double> animation =
@@ -69,7 +80,8 @@ class _AreaListViewState extends State<AreaListView>
                       );
                       animationController?.forward();
                       return AreaView(
-                        imagepath: areaListData[index],
+                        title : widget.title[index],
+                        imageLink: widget.imageLinks[index],
                         animation: animation,
                         animationController: animationController!,
                       );
@@ -91,28 +103,36 @@ class _AreaListViewState extends State<AreaListView>
   }
 }
 
-class AreaView extends StatelessWidget {
+class AreaView extends StatefulWidget {
   const AreaView({
     Key? key,
     this.imagepath,
     this.animationController,
     this.animation,
+    required this.title,
+    required this.imageLink,
   }) : super(key: key);
 
   final String? imagepath;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final String title;
+  final String imageLink;
 
+  @override
+  _AreaViewState createState() => _AreaViewState(); // Add this line
+}
+class _AreaViewState extends State<AreaView> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController!,
+      animation: widget.animationController!,
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
-          opacity: animation!,
+          opacity: widget.animation!,
           child: Transform(
             transform: Matrix4.translationValues(
-                0.0, 50 * (1.0 - animation!.value), 0.0),
+                0.0, 50 * (1.0 - widget.animation!.value), 0.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FitnessAppTheme.white,
@@ -137,14 +157,23 @@ class AreaView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   splashColor: FitnessAppTheme.nearlyDarkBlue.withOpacity(0.2),
                   onTap: () {},
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 16, left: 16, right: 16),
-                        child: Image.asset(imagepath!),
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0), // Optional padding for the text
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(widget.imageLink),
+                        fit: BoxFit.cover, // You can adjust the BoxFit value as needed
                       ),
-                    ],
+                    ),
+                    child: Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: HexColor("#6F56E8") ,
+                        color: Colors.white, // Set an appropriate text color for readability
+                      ),
+                    ),
                   ),
                 ),
               ),
