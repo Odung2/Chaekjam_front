@@ -1,3 +1,4 @@
+import 'package:best_flutter_ui_templates/easter.dart';
 import 'package:best_flutter_ui_templates/fitness_app/models/tabIcon_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training//other_review_home_screen.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/training_screen.dart';
@@ -152,7 +153,7 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 setState(() {
                   tabBody =
                       // TrainingScreen(animationController: animationController);
-                  HotelHomeScreen();
+                  HomePage();
                 });
               });
             } else if (index == 3) {
