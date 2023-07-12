@@ -78,7 +78,7 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                     child: Container(
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 16, top: 8, bottom: 8),
+                                            left: 16, top: 8, right:16, bottom: 8),
                                         child: Column(
                                           mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -89,6 +89,7 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                               widget.OtherReviewData!.titleTxt,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
+                                                fontFamily: 'Line',
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 22,
                                               ),
@@ -102,6 +103,7 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                                 Text(
                                                   widget.OtherReviewData!.subTxt,
                                                   style: TextStyle(
+                                                      fontFamily: 'Line',
                                                       fontSize: 14,
                                                       color: Colors.grey
                                                           .withOpacity(0.8)),
@@ -109,100 +111,71 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                                 const SizedBox(
                                                   width: 4,
                                                 ),
-                                                // Icon(
-                                                //   FontAwesomeIcons.locationDot,
-                                                //   size: 12,
-                                                //   color: HotelAppTheme
-                                                //       .buildLightTheme()
-                                                //       .primaryColor,
-                                                // ),
-                                                // Expanded(
-                                                //   child: Text(
-                                                //     '${OtherReviewData!.dist.toStringAsFixed(1)} km to city',
-                                                //     overflow:
-                                                //     TextOverflow.ellipsis,
-                                                //     style: TextStyle(
-                                                //         fontSize: 14,
-                                                //         color: Colors.grey
-                                                //             .withOpacity(0.8)),
-                                                //   ),
-                                                // ),
                                               ],
                                             ),
                                             Padding(
-                                              padding:
-                                              const EdgeInsets.only(top: 4),
+                                              padding: const EdgeInsets.only(right: 0),
                                               child: Column(
                                                 children: <Widget>[
-                                                  RatingBar(
-                                                    initialRating:
-                                                    widget.OtherReviewData!.rating,
-                                                    direction: Axis.horizontal,
-                                                    allowHalfRating: true,
-                                                    itemCount: 5,
-                                                    itemSize: 24,
-                                                    ratingWidget: RatingWidget(
-                                                      full: Icon(
-                                                        Icons.star_rate_rounded,
-                                                        color: FitnessAppTheme.nearlyDarkBlue,
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(bottom: 4),
+                                                    child: RatingBar(
+                                                      initialRating:
+                                                      widget.OtherReviewData!.rating,
+                                                      direction: Axis.horizontal,
+                                                      allowHalfRating: true,
+                                                      itemCount: 5,
+                                                      itemSize: 24,
+                                                      ratingWidget: RatingWidget(
+                                                        full: Icon(
+                                                          Icons.star_rate_rounded,
+                                                          color: FitnessAppTheme.nearlyDarkBlue,
+                                                        ),
+                                                        half: Icon(
+                                                          Icons.star_half_rounded,
+                                                          color: FitnessAppTheme.nearlyDarkBlue,
+                                                        ),
+                                                        empty: Icon(
+                                                          Icons
+                                                              .star_border_rounded,
+                                                          color: FitnessAppTheme.nearlyDarkBlue,
+                                                        ),
                                                       ),
-                                                      half: Icon(
-                                                        Icons.star_half_rounded,
-                                                        color: FitnessAppTheme.nearlyDarkBlue,
-                                                      ),
-                                                      empty: Icon(
-                                                        Icons
-                                                            .star_border_rounded,
-                                                        color: FitnessAppTheme.nearlyDarkBlue,
-                                                      ),
+                                                      itemPadding:
+                                                      EdgeInsets.zero,
+                                                      onRatingUpdate: (rating) {
+                                                        print(rating);
+                                                      },
                                                     ),
-                                                    itemPadding:
-                                                    EdgeInsets.zero,
-                                                    onRatingUpdate: (rating) {
-                                                      print(rating);
-                                                    },
                                                   ),
-                                                  Container(
-                                                    width: MediaQuery.of(context).size.width* 0.8,
-                                                    child: Center(
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          Flexible(
-                                                            child: TextButton(
-                                                              onPressed: (){
-                                                                Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                    builder: (context) => ExtendedReviewView(data: widget.OtherReviewData),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              style: TextButton.styleFrom(
-                                                                minimumSize: Size.zero, // Set this
-                                                                padding: EdgeInsets.zero, // and this
-                                                              ),
-                                                              child: RichText(
-                                                                overflow: TextOverflow.ellipsis,
-                                                                maxLines: 3,
-                                                                text: TextSpan(
-                                                                  text:'${widget.OtherReviewData!.reviews }',
-                                                                  style: TextStyle(
-                                                                    color: Color(0xFF4E4E4E),
-                                                                    fontSize: 12,
-                                                                    fontFamily: 'Noto Sans KR',
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
+                                                    TextButton(
+                                                      onPressed: (){
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) => ExtendedReviewView(data: widget.OtherReviewData),
                                                           ),
-                                                        ],
+                                                        );
+                                                      },
+                                                      style: TextButton.styleFrom(
+                                                        minimumSize: Size.zero, // Set this
+                                                        padding: EdgeInsets.zero, // and this
+                                                      ),
+                                                      child: RichText(
+                                                        overflow: TextOverflow.ellipsis,
+                                                        maxLines: 3,
+                                                        text: TextSpan(
+                                                          text:'${widget.OtherReviewData!.reviews }',
+                                                          style: TextStyle(
+                                                            color: Color(0xFF4E4E4E),
+                                                            fontSize: 12,
+                                                            fontFamily: 'Line',
+                                                            fontWeight: FontWeight.w400,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-
-                                                  ),
-
+                                                  // ),
                                                 ],
                                               ),
                                             ),
@@ -211,59 +184,13 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                       ),
                                     ),
                                   ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(
-                                  //       right: 16, top: 8),
-                                  //   child: Column(
-                                  //     mainAxisAlignment:
-                                  //     MainAxisAlignment.center,
-                                  //     crossAxisAlignment:
-                                  //     CrossAxisAlignment.end,
-                                  //     children: <Widget>[
-                                  //       Text(
-                                  //         '\$${OtherReviewData!.perNight}',
-                                  //         textAlign: TextAlign.left,
-                                  //         style: TextStyle(
-                                  //           fontWeight: FontWeight.w600,
-                                  //           fontSize: 22,
-                                  //         ),
-                                  //       ),
-                                  //       Text(
-                                  //         '/per night',
-                                  //         style: TextStyle(
-                                  //             fontSize: 14,
-                                  //             color:
-                                  //             Colors.grey.withOpacity(0.8)),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
+
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        // Positioned(
-                        //   top: 8,
-                        //   right: 8,
-                        //   child: Material(
-                        //     color: Colors.transparent,
-                        //     child: InkWell(
-                        //       borderRadius: const BorderRadius.all(
-                        //         Radius.circular(32.0),
-                        //       ),
-                        //       onTap: () {},
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: Icon(
-                        //           Icons.favorite_border,
-                        //           color: HotelAppTheme.buildLightTheme()
-                        //               .primaryColor,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
+
                       ],
                     ),
                   ),

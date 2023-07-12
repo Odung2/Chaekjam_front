@@ -214,6 +214,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   '나의 리뷰 🐶',
                   style: TextStyle(
                     fontSize: 22,
+                    fontFamily: 'Line',
                     color: isLightMode ? AppTheme.darkText : AppTheme.white,
                     fontWeight: FontWeight.w700,
                   ),

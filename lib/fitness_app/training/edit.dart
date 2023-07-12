@@ -58,7 +58,7 @@ class _EditNotePageState extends State<EditNotePage> {
                     },
                     textInputAction: TextInputAction.next,
                     style: TextStyle(
-                        fontFamily: 'ZillaSlab',
+                        fontFamily: 'Line',
                         fontSize: 32,
                         fontWeight: FontWeight.w700),
                     decoration: InputDecoration.collapsed(
@@ -66,7 +66,7 @@ class _EditNotePageState extends State<EditNotePage> {
                       hintStyle: TextStyle(
                           color: Colors.grey.shade400,
                           fontSize: 32,
-                          fontFamily: 'ZillaSlab',
+                          fontFamily: 'Line',
                           fontWeight: FontWeight.w700),
                       border: InputBorder.none,
                     ),
@@ -87,6 +87,7 @@ class _EditNotePageState extends State<EditNotePage> {
                       hintText: 'Start typing...',
                       hintStyle: TextStyle(
                           color: Colors.grey.shade400,
+                          fontFamily: 'Line',
                           fontSize: 18,
                           fontWeight: FontWeight.w500),
                       border: InputBorder.none,
@@ -247,6 +248,7 @@ class _EditNotePageState extends State<EditNotePage> {
                   child: Text('DELETE',
                       style: prefix0.TextStyle(
                           color: Colors.red.shade300,
+                          fontFamily: 'Line',
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1)),
                   onPressed: () {
@@ -260,6 +262,7 @@ class _EditNotePageState extends State<EditNotePage> {
                   child: Text('CANCEL',
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
+                          fontFamily: 'Line',
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1)),
                   onPressed: () {

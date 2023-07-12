@@ -518,6 +518,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                     child: Text(
                       '530 hotels found',
                       style: TextStyle(
+                        fontFamily: 'Line',
                         fontWeight: FontWeight.w100,
                         fontSize: 16,
                       ),
@@ -646,6 +647,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                 child: Text(
                   '리뷰모아 📖',
                   style: TextStyle(
+                    fontFamily: 'Line',
                     fontWeight: FontWeight.w600,
                     fontSize: 22,
                   ),
