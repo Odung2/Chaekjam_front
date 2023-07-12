@@ -1,3 +1,4 @@
+import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/extended_review_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/other_reivew_list_data.dart';
 import 'package:best_flutter_ui_templates/hotel_booking/hotel_app_theme.dart';
@@ -143,22 +144,16 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                                                     ratingWidget: RatingWidget(
                                                       full: Icon(
                                                         Icons.star_rate_rounded,
-                                                        color: HotelAppTheme
-                                                            .buildLightTheme()
-                                                            .primaryColor,
+                                                        color: FitnessAppTheme.nearlyDarkBlue,
                                                       ),
                                                       half: Icon(
                                                         Icons.star_half_rounded,
-                                                        color: HotelAppTheme
-                                                            .buildLightTheme()
-                                                            .primaryColor,
+                                                        color: FitnessAppTheme.nearlyDarkBlue,
                                                       ),
                                                       empty: Icon(
                                                         Icons
                                                             .star_border_rounded,
-                                                        color: HotelAppTheme
-                                                            .buildLightTheme()
-                                                            .primaryColor,
+                                                        color: FitnessAppTheme.nearlyDarkBlue,
                                                       ),
                                                     ),
                                                     itemPadding:
@@ -248,27 +243,27 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
                             ),
                           ],
                         ),
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(32.0),
-                              ),
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: HotelAppTheme.buildLightTheme()
-                                      .primaryColor,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
+                        // Positioned(
+                        //   top: 8,
+                        //   right: 8,
+                        //   child: Material(
+                        //     color: Colors.transparent,
+                        //     child: InkWell(
+                        //       borderRadius: const BorderRadius.all(
+                        //         Radius.circular(32.0),
+                        //       ),
+                        //       onTap: () {},
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Icon(
+                        //           Icons.favorite_border,
+                        //           color: HotelAppTheme.buildLightTheme()
+                        //               .primaryColor,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -281,3 +276,5 @@ class _OtherReviewListViewState extends State<OtherReviewListView>
     );
   }
 }
+
+

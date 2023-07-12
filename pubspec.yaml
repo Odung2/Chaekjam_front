@@ -44,6 +44,8 @@ dependencies:
     url_launcher: ^6.1.12
     shared_preferences: ^2.2.0
     share_plus: ^4.5.1
+    #글자 animated 간단 기능
+    animated_text_kit: ^4.2.1
 
 dev_dependencies:
     flutter_test:
