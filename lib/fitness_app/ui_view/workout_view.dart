@@ -1,6 +1,8 @@
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import '../fitness_app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class WorkoutView extends StatefulWidget {
   final AnimationController? animationController;
@@ -19,6 +21,38 @@ class WorkoutView extends StatefulWidget {
 
   @override
   _WorkoutViewState createState() => _WorkoutViewState();
+}
+
+void removeSharedPreferences(BuildContext context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  print(prefs.getString('success_parameter')); //
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Logout?'),
+        content: Text('로그아웃 하시겠습니까?'),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+          ElevatedButton(
+            child: Text('Logout'),
+            onPressed: () {
+              prefs.remove('success_parameter'); // Remove the key
+              Navigator.of(context).pop(); // Close the dialog
+              print(prefs.getString('success_parameter')); // Should print null
+            },
+          ),
+        ],
+      );
+    },
+  );
+  // prefs.remove('success_parameter'); // Remove the 'success_parameter' key
+  // You can also remove specific preferences using prefs.remove('key')
 }
 
 class _WorkoutViewState extends State<WorkoutView> {
@@ -135,12 +169,17 @@ class _WorkoutViewState extends State<WorkoutView> {
                                       blurRadius: 8.0),
                                 ],
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.logout,
-                                  color: HexColor("#6F56E8"),
-                                  size: 44,
+                              child: GestureDetector(
+                                onTap: (){
+                                  removeSharedPreferences(context);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.logout,
+                                    color: HexColor("#6F56E8"),
+                                    size: 44,
+                                  ),
                                 ),
                               ),
                             )
