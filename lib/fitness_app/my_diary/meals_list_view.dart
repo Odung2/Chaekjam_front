@@ -178,6 +178,8 @@ class MealsView extends StatelessWidget {
                                     Text(
                                       mealsListData!.meals!.join('\n'),
                                       style: TextStyle(
+                                        // maxLines: 3, // Set the maximum number of lines displayed
+                                        overflow: TextOverflow.ellipsis, // Add an ellipsis when overflowing
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 10,

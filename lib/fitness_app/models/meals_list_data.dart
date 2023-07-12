@@ -67,7 +67,7 @@ class MealsListData {
             imagePath: 'assets/fitness_app/' + pngsrc,
             titleTxt: title,
             kacl: 0,
-            meals: <String>[location, 'description', 'Apple'],
+            meals: <String>['\n', location, 'description...'],
             startColor: startC,
             endColor: endC,
           );
@@ -120,7 +120,7 @@ class MealsListData {
             imagePath: 'assets/fitness_app/' + pngsrc,
             titleTxt: title,
             kacl: 0,
-            meals: <String>[location, 'description', 'Apple'],
+            meals: <String>['\n', location, 'description...'],
             startColor: startC,
             endColor: endC,
           );
