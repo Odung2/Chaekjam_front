@@ -14,9 +14,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="Best Flutter UI Templates"
+        android:label="📖책잼📖"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/nubjuki_icon"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <activity

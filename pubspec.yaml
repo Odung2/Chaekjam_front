@@ -47,6 +47,13 @@ dependencies:
     #글자 animated 간단 기능
     animated_text_kit: ^4.2.1
 
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/images/chaekjam_nubjuki_app.jpg"
+
+
+
 dev_dependencies:
     flutter_test:
         sdk: flutter
