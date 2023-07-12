@@ -2,6 +2,10 @@ import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import '../fitness_app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:best_flutter_ui_templates/chaekjam_home_screen.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
+
 
 
 class WorkoutView extends StatefulWidget {
@@ -41,10 +45,15 @@ void removeSharedPreferences(BuildContext context) async {
           ),
           ElevatedButton(
             child: Text('Logout'),
-            onPressed: () {
+            onPressed: () async {
               prefs.remove('success_parameter'); // Remove the key
+              await CookieManager.instance().deleteAllCookies();
               Navigator.of(context).pop(); // Close the dialog
-              print(prefs.getString('success_parameter')); // Should print null
+              print(prefs.getString('success_parameter'));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+              );// Should print null
             },
           ),
         ],
@@ -56,6 +65,7 @@ void removeSharedPreferences(BuildContext context) async {
 }
 
 class _WorkoutViewState extends State<WorkoutView> {
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
