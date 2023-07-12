@@ -18,29 +18,29 @@ class TabIconData {
 
   static List<TabIconData> tabIconsList = <TabIconData>[
     TabIconData(
-      imagePath: 'assets/fitness_app/tab_1.png',
-      selectedImagePath: 'assets/fitness_app/tab_1s.png',
+      imagePath: 'assets/fitness_app/meetinggroup_default.jpg',
+      selectedImagePath: 'assets/fitness_app/meetinggroup_end.jpg',
       index: 0,
       isSelected: true,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/fitness_app/tab_2.png',
-      selectedImagePath: 'assets/fitness_app/tab_2s.png',
+      imagePath: 'assets/fitness_app/review_default.jpg',
+      selectedImagePath: 'assets/fitness_app/review_end.jpg',
       index: 1,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/fitness_app/tab_3.png',
-      selectedImagePath: 'assets/fitness_app/tab_3s.png',
+      imagePath: 'assets/fitness_app/egg_default.jpg',
+      selectedImagePath: 'assets/fitness_app/egg_end.jpg',
       index: 2,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/fitness_app/tab_4.png',
-      selectedImagePath: 'assets/fitness_app/tab_4s.png',
+      imagePath: 'assets/fitness_app/profile_default.jpg',
+      selectedImagePath: 'assets/fitness_app/profile_end.jpg',
       index: 3,
       isSelected: false,
       animationController: null,
