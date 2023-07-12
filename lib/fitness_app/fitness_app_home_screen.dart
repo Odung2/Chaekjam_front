@@ -3,12 +3,12 @@ import 'package:best_flutter_ui_templates/fitness_app/training//other_review_hom
 import 'package:best_flutter_ui_templates/fitness_app/training/training_screen.dart';
 // import 'package:best_flutter_ui_templates/home_screen.dart';
 import 'package:best_flutter_ui_templates/login_webview.dart';
-import 'package:best_flutter_ui_templates/fitness_app/training/write_review.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fitness_app_theme.dart';
 import 'my_diary/my_diary_screen.dart';
-import 'write_review/screens/home.dart';
+
+import 'package:best_flutter_ui_templates/fitness_app/training/write_review.dart';
 
 
 

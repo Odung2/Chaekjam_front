@@ -7,6 +7,7 @@ import '../../model/homelist.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/area_list_view.dart';
+import 'package:best_flutter_ui_templates/fitness_app/training/edit.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -21,14 +22,23 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<MyReviewData> MyReviewList = [];
   AnimationController? animationController;
   bool multiple = true;
+   // Store the BuildContext
+
+  _MyHomePageState();
 
 
   @override
   void initState() {
-    initializeMyReviewList();
+    // initializeMyReviewList();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initializeMyReviewList();
   }
 
 
@@ -227,9 +237,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     color: isLightMode ? AppTheme.dark_grey : AppTheme.white,
                   ),
                   onTap: () {
-                    setState(() {
-                      multiple = !multiple;
-                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditNotePage(),
+                      ),
+                    );
                   },
                 ),
               ),
