@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -86,41 +88,40 @@ class ExtendedReviewView extends StatelessWidget{
                                       //     right: 16, bottom: 8),
                                       flex:7,
                                       child: Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        // mainAxisAlignment:
+                                        // MainAxisAlignment
+                                        //     .spaceBetween,
+                                        // crossAxisAlignment: CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Flexible(
                                             flex:1,
                                             child: Text(     //디자인 수업료 부분이라 삭제
-                                              '${data!.subTxt}',
+                                              '작성자: ${data!.subTxt}',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontFamily: 'WorkSans',
                                                 fontWeight: FontWeight.w200,
                                                 fontSize: 24,
                                                 letterSpacing: 0.27,
-                                                color: Colors.black45,
+                                                color: Colors.black,
                                               ),
                                             ),
                                           ),
-                                          Flexible(
-                                            flex:1,
+                                          Flexible(flex:1, child: Spacer()),
+                                          Container(
                                             child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
                                               children: <Widget>[
                                                 Text(
                                                   '${data!.rating}',
-                                                  textAlign:
-                                                  TextAlign.right,
+                                                  textAlign: TextAlign.right,
                                                   style: TextStyle(
                                                     fontFamily: 'WorkSans',
                                                     fontWeight:
                                                     FontWeight.w200,
                                                     fontSize: 24,
                                                     letterSpacing: 0.27,
-                                                    color: Colors.black54,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                                 Icon(
@@ -131,68 +132,36 @@ class ExtendedReviewView extends StatelessWidget{
                                               ],
                                             ),
                                           ),
+                                          Flexible(flex:1, child: Spacer()),
+
                                           Flexible(
                                             flex: 8,
-                                            child: Text(     //디자인 수업료 부분이라 삭제
-                                              '${data!.reviews}',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontFamily: 'WorkSans',
-                                                fontWeight: FontWeight.w200,
-                                                fontSize: 24,
-                                                letterSpacing: 0.27,
-                                                color: Colors.black54,
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width * 0.9,
+                                              height: MediaQuery.of(context).size.height * 0.9,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.indigo,
+                                                  // width:10,
+                                                ),
+                                              ),
+                                              child: Text(     //디자인 수업료 부분이라 삭제
+                                                '${data!.reviews}',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontFamily: 'WorkSans',
+                                                  fontWeight: FontWeight.w200,
+                                                  fontSize: 24,
+                                                  letterSpacing: 0.27,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    // Padding(    //Join Course 파트인거 같아서 삭제
-                                    //   padding: const EdgeInsets.only(
-                                    //       bottom: 16, right: 16),
-                                    //   child: Row(
-                                    //     mainAxisAlignment:
-                                    //     MainAxisAlignment
-                                    //         .spaceBetween,
-                                    //     crossAxisAlignment:
-                                    //     CrossAxisAlignment.start,
-                                    //     children: <Widget>[
-                                    //       // Text(    //이게 수업료 파트
-                                    //       //   '\$${category!.money}',
-                                    //       //   textAlign: TextAlign.left,
-                                    //       //   style: TextStyle(
-                                    //       //     fontWeight: FontWeight.w600,
-                                    //       //     fontSize: 18,
-                                    //       //     letterSpacing: 0.27,
-                                    //       //     color: DesignCourseAppTheme
-                                    //       //         .nearlyBlue,
-                                    //       //   ),
-                                    //       // ),
-                                    //       Container(
-                                    //         decoration: BoxDecoration(
-                                    //           color: DesignCourseAppTheme
-                                    //               .nearlyBlue,
-                                    //           borderRadius:
-                                    //           const BorderRadius.all(
-                                    //               Radius.circular(
-                                    //                   8.0)),
-                                    //         ),
-                                    //         child: Padding(
-                                    //           padding:
-                                    //           const EdgeInsets.all(
-                                    //               4.0),
-                                    //           child: Icon(
-                                    //             Icons.add,
-                                    //             color:
-                                    //             DesignCourseAppTheme
-                                    //                 .nearlyWhite,
-                                    //           ),
-                                    //         ),
-                                    //       )
-                                    //     ],
-                                    //   ),
-                                    // ),
+
                                   ],
                                 ),
                               ),
@@ -204,37 +173,11 @@ class ExtendedReviewView extends StatelessWidget{
                   ],
                 ),
               ),
-              // Expanded(
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(
-              //         top: 24, bottom: 24, left: 16),
-              //     child: Row(
-              //       children: <Widget>[
-              //         ClipRRect(
-              //           borderRadius:
-              //           const BorderRadius.all(Radius.circular(16.0)),
-              //           child: AspectRatio(
-              //               aspectRatio: 1.0,
-              //               child: Image.network(data!.imagePath)),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
 
             ],
           ),
         ),
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Image.network(data?.imagePath ?? ''),
-        //     Text(data?.titleTxt ?? ''),
-        //     Text(data?.subTxt ?? ''),
-        //     Text(data?.reviews ?? ''),
-        //     // 필요한 정보 표시
-        //   ],
-        // ),
+
       ),
     );
   }
