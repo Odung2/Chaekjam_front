@@ -70,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       child: Text(
                         '책잼',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 40,
-                          fontFamily: 'WorkSans',
-                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Line',
+                          fontWeight: FontWeight.w700,
                           letterSpacing: -0.24,
                         ),
                       ),
@@ -82,16 +82,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     Center(
                       child: Container(
                         alignment: Alignment.centerRight,
-                        width: size.width * 0.9,
+                        width: size.width * 0.8,
                         child: AnimatedTextKit(
                           animatedTexts: [
                             TyperAnimatedText(
                               '책잼, 독서의 새로운 차원!\n독서모임을 만들고, 함께 책을 읽는 사람들과 소통해보세요. \n감상 공유, 독서 후기 작성, 다양한 독서 모임 참여 등 다채로운 기능을 경험해보세요. \n책을 사랑하는 이들을 위한 독서 플랫폼, 지금 책잼에서 독서의 재미를 더해보세요!',
                               textStyle: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
-                                fontFamily: 'WorkSans',
-                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Line',
+                                fontWeight: FontWeight.w400,
                                 letterSpacing: -0.24,
                               ),
                             ),
