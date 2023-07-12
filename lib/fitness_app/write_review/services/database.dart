@@ -9,16 +9,20 @@ class NotesDatabaseService {
 
   static final NotesDatabaseService db = NotesDatabaseService._();
 
-  late Database _database;
+  late Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database;
-    // if _database is null we instantiate it
-    _database = await init();
-    return _database;
+    if (_database != null && _database!.isOpen) {
+      return _database!;
+    } else {
+      _database = await init();
+      return _database!;
+    }
+        // if _database is null we instantiate it
+
   }
 
-  init() async {
+  Future<Database> init() async {
     String path = await getDatabasesPath();
     path = join(path, 'notes.db');
     print("Entered path $path");
@@ -36,7 +40,7 @@ class NotesDatabaseService {
     List<NotesModel> notesList = [];
     List<Map<String, dynamic>> maps = await db.query('Notes',
         columns: ['_id', 'title', 'content', 'date', 'isImportant']);
-    if (maps.length > 0) {
+    if (maps.isNotEmpty) {
       maps.forEach((map) {
         notesList.add(NotesModel.fromMap(map));
       });
@@ -44,14 +48,14 @@ class NotesDatabaseService {
     return notesList;
   }
 
-  updateNoteInDB(NotesModel updatedNote) async {
+  Future<void> updateNoteInDB(NotesModel updatedNote) async {
     final db = await database;
     await db.update('Notes', updatedNote.toMap(),
         where: '_id = ?', whereArgs: [updatedNote.id]);
     print('Note updated: ${updatedNote.title} ${updatedNote.content}');
   }
 
-  deleteNoteInDB(NotesModel noteToDelete) async {
+  Future<void> deleteNoteInDB(NotesModel noteToDelete) async {
     final db = await database;
     await db.delete('Notes', where: '_id = ?', whereArgs: [noteToDelete.id]);
     print('Note deleted');
