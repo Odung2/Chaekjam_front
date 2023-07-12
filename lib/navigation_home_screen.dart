@@ -45,6 +45,9 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         ),
       ),
     );
+    // return Padding(
+    //   padding: const EdgeInsets.all(1.0),
+    // );
   }
 
   void changeIndex(DrawerIndex drawerIndexdata) {

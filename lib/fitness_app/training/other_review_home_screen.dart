@@ -1,11 +1,14 @@
+import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/other_reivew_list_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/training/other_review_list_view.dart';
 import 'package:best_flutter_ui_templates/hotel_booking/calendar_popup_view.dart';
 import 'package:best_flutter_ui_templates/hotel_booking/hotel_list_view.dart';
 import 'package:best_flutter_ui_templates/hotel_booking/model/hotel_list_data.dart';
+import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+// import '../../main.dart';
 import 'filters_screen.dart';
 import 'hotel_app_theme.dart';
 import 'package:http/http.dart' as http;
@@ -118,18 +121,18 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                 return Column(
                                   children: <Widget>[
                                     getSearchBarUI(),
-                                    getTimeDateUI(),
+                                    // getTimeDateUI(),
                                   ],
                                 );
                               }, childCount: 1),
                             ),
-                            SliverPersistentHeader(
-                              pinned: true,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                getFilterBarUI(),
-                              ),
-                            ),
+                            // SliverPersistentHeader(
+                            //   pinned: true,
+                            //   floating: true,
+                            //   delegate: ContestTabHeader(
+                            //     getFilterBarUI(),
+                            //   ),
+                            // ),
                           ];
                         },
                         body: Container(
@@ -428,16 +431,35 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
             ),
           ),
           Container(
+            // decoration: BoxDecoration(
+              // color: HotelAppTheme.buildLightTheme().primaryColor,
+            //   color: FitnessAppTheme.nearlyDarkBlue,
+            //   borderRadius: const BorderRadius.all(
+            //     Radius.circular(38.0),
+            //   ),
+            //   boxShadow: <BoxShadow>[
+            //     BoxShadow(
+            //         color: Colors.grey.withOpacity(0.4),
+            //         offset: const Offset(0, 2),
+            //         blurRadius: 8.0),
+            //   ],
+            // ),
             decoration: BoxDecoration(
-              color: HotelAppTheme.buildLightTheme().primaryColor,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(38.0),
-              ),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    offset: const Offset(0, 2),
-                    blurRadius: 8.0),
+              color: FitnessAppTheme.nearlyDarkBlue,
+                gradient: LinearGradient(
+                  colors: [
+                      FitnessAppTheme.nearlyDarkBlue,
+                      HexColor('#6A88E5'),
+                    ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight),
+                shape: BoxShape.circle,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: FitnessAppTheme.nearlyDarkBlue
+                        .withOpacity(0.4),
+                    offset: const Offset(8.0, 16.0),
+                    blurRadius: 16.0),
               ],
             ),
             child: Material(
@@ -595,25 +617,29 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
             top: MediaQuery.of(context).padding.top, left: 8, right: 8),
         child: Row(
           children: <Widget>[
-            Container(
-              alignment: Alignment.centerLeft,
-              width: AppBar().preferredSize.height + 40,
-              height: AppBar().preferredSize.height,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.arrow_back),
-                  ),
-                ),
-              ),
+            // Container(
+            //   alignment: Alignment.centerLeft,
+            //   width: AppBar().preferredSize.height + 40,
+            //   height: AppBar().preferredSize.height,
+            //   child: Material(
+            //     color: Colors.transparent,
+            //     child: InkWell(
+            //       borderRadius: const BorderRadius.all(
+            //         Radius.circular(32.0),
+            //       ),
+            //       onTap: () {
+            //         Navigator.pop(context);
+            //       },
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Icon(Icons.arrow_back),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Container(alignment: Alignment.centerLeft,
+            width: AppBar().preferredSize.height + 40,
+            height: AppBar().preferredSize.height,
             ),
             Expanded(
               child: Center(
@@ -626,42 +652,43 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                 ),
               ),
             ),
-            Container(
-              width: AppBar().preferredSize.height + 40,
-              height: AppBar().preferredSize.height,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(32.0),
-                      ),
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.favorite_border),
-                      ),
-                    ),
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(32.0),
-                      ),
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(FontAwesomeIcons.locationDot),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            Spacer(),
+            // Container(
+            //   width: AppBar().preferredSize.height + 40,
+            //   height: AppBar().preferredSize.height,
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: <Widget>[
+            //       Material(
+            //         color: Colors.transparent,
+            //         child: InkWell(
+            //           borderRadius: const BorderRadius.all(
+            //             Radius.circular(32.0),
+            //           ),
+            //           onTap: () {},
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Icon(Icons.favorite_border),
+            //           ),
+            //         ),
+            //       ),
+            //       Material(
+            //         color: Colors.transparent,
+            //         child: InkWell(
+            //           borderRadius: const BorderRadius.all(
+            //             Radius.circular(32.0),
+            //           ),
+            //           onTap: () {},
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Icon(FontAwesomeIcons.locationDot),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),
